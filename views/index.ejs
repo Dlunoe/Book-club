@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>BOOK CLUB READS</h1>
+
+    <div>
+        <p><a href='/books/new'>Add Book to List</a></p>
+
+    <div>
+        <ul>
+            <% bookIndex.forEach(function(book) { %>
+            <li> 
+                <p class="title">
+                    <a href='/books/<%= book._id %>'><%= book.title %></a>
+                </p>
+                <p class="author">by <%= book.author %></p>
+                <p class="buttons">
+                    <button><a href='/books/<%= book._id %>/edit'>Edit</a></button>
+                    <form action='/books/<%= book._id %>?_method=DELETE' method='POST'>
+                        <input type='submit' value='Delete' />
+                    </form>
+                </p>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+    
+
+<%# /* pulls in info to get css working */ %>
+<link rel='stylesheet' href='/css/style.css'>
+<script src='client.js' charset='utf-8'></script>'
+
+</body>
+</html>
