@@ -7,11 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+<%-include ./partials/_navbar.ejs%>
     <h1>SHOW INDEX</h1>
 
     <p class="title"> <%= bookShow.title %></p>
     <p class="author"> <%= bookShow.author %></p>
     <p class="genre"> <%= bookShow.genre%></p>
+    <h6 class="creator">uploaded by:<%=bookShow.creator%>
 
 
 <link rel='stylesheet' type='text/css' href='css/style.css'>
