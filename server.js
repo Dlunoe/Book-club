@@ -19,6 +19,8 @@ const usersController= require('./controllers/usersController')
 const Book = require('./models/users');
 const booksController = require('./controllers/booksController');
 
+const Club = require('./models/clubs');
+const clubsController = require('./controllers/clubsController');
 
 //MIDDLEWEAR
 app.use(bodyParser.urlencoded({extended: false}));
@@ -32,32 +34,33 @@ app.use(session({
 
 
 
-//SEED ROUTE
-//Can be used to send some intial data for testing.
-// app.get('/books/seed',(req, res)=>{
-//     Book.create([
-//         {
-//             title: 'The Alice Network',
-//             author: 'Alice Quinn',
-//             genre: 'Historical Fiction'
-//         },
-//         {
-//             title: 'Where the Crawdads Sing',
-//             author: 'Delia Owens',
-//             genre: 'Fiction'
-//         },
-//         {
-//             title: 'The Silent Patient',
-//             author: 'Alex Michaelides',
-//             genre: 'Thriller'
-//         }
-//     ], (err, data)=>{
-//         res.redirect('/books');
-//     })
-// });
+// SEED ROUTE
+// Can be used to send some intial data for testing.
+app.get('/books/seed',(req, res)=>{
+    Book.create([
+        {
+            title: 'The Alice Network',
+            author: 'Alice Quinn',
+            genre: 'Historical Fiction'
+        },
+        {
+            title: 'Where the Crawdads Sing',
+            author: 'Delia Owens',
+            genre: 'Fiction'
+        },
+        {
+            title: 'The Silent Patient',
+            author: 'Alex Michaelides',
+            genre: 'Thriller'
+        }
+    ], (err, data)=>{
+        res.redirect('/books');
+    })
+});
 
 app.use("/books", booksController);
-app.use("/users", usersController)
+app.use("/users", usersController);
+app.use("/clubs", clubsController);
 
 
 app.listen(3000, () => {
