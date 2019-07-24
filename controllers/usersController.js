@@ -30,13 +30,15 @@ router.post("/login", async (req, res)=>{
         const userFromDb = await User.findOne({username:req.body.username})
         if(req.body.password!==userFromDb.password){
             console.log(req.body.password);
-            console.log(req.params.password)
-            res.send("Password is incorrect")
-            res.redirect("/login")
+            console.log("========");
+            console.log(userFromDb.password)
+            res.redirect("/users/login")
         }else{
-            req.session.userId=userFromDb._Id
+            console.log(userFromDb)
+            req.session.userId=userFromDb._id
+            console.log(req.session.userId)
             res.redirect("/books")
-        }
+        } 
     }catch(err){
         if(err="11000"){
             alert("Username is already taken");
