@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+<%-include ./partials/_navbar.ejs%>
     <h1>UPDATE BOOK</h1>
     <form action='/books/<%= bookUpdate._id %>?_method=PUT' method="POST">
         Name: <input type='text' name='title' value='<%= bookUpdate.title %>' /><br/>
