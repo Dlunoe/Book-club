@@ -25,27 +25,6 @@ router.post("/", async (req, res)=>{
     }  
 })
 
-router.put('/home/readingList', async (req, res)=>{
-    const foundBook = await Book.findById(req.params).populate('creator')
-    console.log(req.session.user)
-    console.log("--------------")
-    console.log(foundBook)
-    User.findByIdAndUpdate({_id:req.session.user._id},
-        {readingList: {
-            title:foundBook.title,
-            author:foundBook.author,
-            genre:foundBook.genre
-            }
-        }
-    ,
-        {new:true},
-        (error, user)=>{
-            if (error){console.log(error)}
-            else{
-                res.redirect("/users/home")}
-            }
-        )
-})
 
 router.get("/home", async (req, res)=>{
     try{
