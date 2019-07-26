@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require ('../models/books');
+const User = require('../models/users')
 
 //INDEX ROUTE
 router.get('/', async (req, res) => {
@@ -41,11 +42,13 @@ router.post('/', (req, res) => {
 router.get('/:id', async (req, res) => {
     try{
         const foundBook = await Book.findById(req.params.id).populate('creator');
+        // console.log(foundBook);
         res.render('show.ejs', {
-            bookShow: foundBook
+            bookShow: foundBook         
         });
         console.log("-------------------")
-        console.log(creator)
+        console.log(bookShow)
+        // console.log(bookShow)
     }catch(err){
         res.send(err)
     }  
@@ -59,6 +62,27 @@ router.get('/:id/edit', (req, res) => {
         });
     });
 });
+//reading list
+router.put('/:id/readingList', async (req,res)=>{
+    const foundBook = await Book.findById(req.params.id).populate('creator')
+        User.findByIdAndUpdate({_id:req.session.user._id},
+            {$push: {readingList: {
+                title:foundBook.title,
+                author:foundBook.author,
+                genre:foundBook.genre
+                }
+            }
+        },
+            {new:true},
+            (error, user)=>{
+                if (error){console.log(error)}
+                else{
+                    console.log("-------")
+                    console.log(req.session.user)
+                    res.redirect("/users/home")}
+                }
+            )
+    })
 
 //UPDATE ROUTE
 router.put('/:id', (req, res) => {

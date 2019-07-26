@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<%-include ../partials/_navbar.ejs%>
+    <h1>USER PAGE</h1>
+    <%=userOnPage.username%>
+<div class="container" class="book-club">
+</div>
+<div class="container" class="reading-list">
+
+<%for (i=0; i<userOnPage.readingList.length; i++){%>
+    <h5><%=userOnPage.readingList[i].title%></h5>
+    <p><%=userOnPage.readingList[i].author%></p>
+    <p><%=userOnPage.readingList[i].genre%></p>
+<%}%>
+</div>
+<div class="container" class="finished-list">
+</div>
+
+
+<link rel='stylesheet' type='text/css' href='css/style.css'>
+
+</body>
+</html>
