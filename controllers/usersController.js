@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users');
+const Book = require('../models/books')
 
 //new page
 router.get('/new', (req, res)=>{
@@ -24,29 +25,47 @@ router.post("/", async (req, res)=>{
     }  
 })
 
+
+router.get("/home", async (req, res)=>{
+    try{
+        const userAtHome = req.session.user
+        res.render('users/show.ejs', {
+            userOnPage : userAtHome
+        })
+        
+    }catch(err){
+        console.log(err);
+        res.send(err)
+    }
+    
+})
+
 //login post route
 router.post("/login", async (req, res)=>{
     try{
         const userFromDb = await User.findOne({username:req.body.username})
         if(req.body.password!==userFromDb.password){
-            console.log(req.body.password);
-            console.log("========");
-            console.log(userFromDb.password)
+            // console.log(req.body.password);
+            // console.log("========");
+            //console.log(userFromDb)
             res.redirect("/users/login")
         }else{
-            console.log(userFromDb)
+            // console.log(userFromDb)
             req.session.userId=userFromDb._id
-            console.log(req.session.userId)
+            req.session.user=userFromDb
+            console.log(req.session.user)
             res.redirect("/books")
         } 
     }catch(err){
         if(err="11000"){
-            alert("Username is already taken");
+            res.send("Username is already taken");
         }
         console.log(err);
         res.send(err)
     }
     
 })
+
+
 
 module.exports = router;

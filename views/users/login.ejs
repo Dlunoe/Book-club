@@ -8,6 +8,7 @@
 </head>
 <body>
 <%-include ../partials/_navbar.ejs%>
+<%-include ../partials/_jumbo.ejs%>
 <form action="/users/login" method="POST">
     <label for="username">Username:</label>
     <input type="text" name="username">
@@ -17,7 +18,7 @@
 </form>
 
 <h6>New user? Make an account <a href="/users/new">here</a></h6>
-  
+  <%-include ../partials/_footer.ejs%>
     
 </body>
 </html>
