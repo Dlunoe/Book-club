@@ -14,3 +14,25 @@
 a {
     text-decoration: none;
 }
+
+.nextBook {
+    text-align: center;
+}
+
+.navbar {
+    background: black;
+}
+
+.btn {
+    background: black;
+    color: white;
+    border: none;
+}
+
+.jumbotron {
+    border-radius: 0;
+}
+
+.container-fluid {
+    min-height: 300px;
+}

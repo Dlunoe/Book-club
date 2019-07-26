@@ -19,6 +19,8 @@ router.get('/seed',(req, res)=>{
 });
 
 
+module.exports = router;
+
 //INDEX ROUTE
 router.get('/', (req, res) => {
     Club.find({}, (err, clubs) => {
