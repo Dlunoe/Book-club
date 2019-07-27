@@ -12,6 +12,8 @@ const bookSchema = new mongoose.Schema ({
     genre: String,
     cover: String,
     nextBook: String,
+    clubRead: String,
+    clubSuggest: String,
     creator:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",

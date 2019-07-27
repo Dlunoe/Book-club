@@ -1,0 +1,2 @@
+Find club name:
+                <h3><%= clubIndex[0].clubName %></h3>

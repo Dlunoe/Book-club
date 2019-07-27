@@ -57,6 +57,10 @@ router.post('/', (req, res) => {
             title: req.body.title,
             author: req.body.author,
             genre: req.body.genre,
+            cover: req.body.cover,
+            nextBook: req.body.nextBook,
+            clubRead: req.body.clubRead,
+            clubSuggest: req.body.clubSuggest,
             creator:req.session.userId   
     });
     res.redirect("/books")

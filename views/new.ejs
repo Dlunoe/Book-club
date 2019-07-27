@@ -8,17 +8,40 @@
 </head>
 <body>
 <%-include ./partials/_navbar.ejs%>
-    <h1>SUGGEST A BOOK</h1>
+<%-include ./partials/_jumbo.ejs%>
+
+<form action='/books' method='POST'>
+
+<div class = 'container-fluid'>
+    <div class = 'row'>
+        <div class = 'col'>
+            <h1>ADD A BOOK</h1>
+        </div>
+    </div>  
+    <div class = 'row'>                  
+        <div class = 'col mainSection'>
+            Title: <input type='text' name='title' /><br/>
+            Author: <input type='text' name='author' /><br/>
+            Genre: <input type='text' name='genre' /><br/>
+        </div>
+        <div class = 'col secondSection'>
+            Prior Club Read: <input type='text' name='clubRead' /><br/>
+            Suggest For Club: <input type='text' name ='clubSuggest' /><br> 
+        </div>
+    </div> 
+    <div class = 'row'>
+        <div class = 'col centeredDiv'>
+            <input type='submit' name='' value="Add New Book" />
+        </div>
+    </div>
+</div> 
+
+</form>  
 
 
-    <form action='/books' method='POST'>
-        Title: <input type='text' name='title' /><br/>
-        Author: <input type='text' name='author' /><br/>
-        Genre: <input type='text' name='genre' /><br/>
-        <input type='submit' name='' value="Submit Suggestion" />
-    </form>
 
 <%-include ./partials/_footer.ejs%>
+
 
 </body>
 </html>
