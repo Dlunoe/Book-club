@@ -3,6 +3,32 @@ const router = express.Router();
 const Book = require ('../models/books');
 const User = require('../models/users')
 
+// SEED ROUTE
+// Can be used to send some intial data for testing.
+router.get('/seed',(req, res)=>{
+    Book.create([
+        {
+            title: 'The Alice Network',
+            author: 'Alice Quinn',
+            genre: 'Historical Fiction'
+        },
+        {
+            title: 'Where the Crawdads Sing',
+            author: 'Delia Owens',
+            genre: 'Fiction'
+        },
+        {
+            title: 'The Silent Patient',
+            author: 'Alex Michaelides',
+            genre: 'Thriller'
+        }
+    ], (err, data)=>{
+        res.redirect('/books');
+    })
+});
+
+
+
 //INDEX ROUTE
 router.get('/', async (req, res) => {
     try{

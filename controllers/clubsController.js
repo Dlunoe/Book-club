@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Club = require ('../models/clubs');
+const Book = require ('../models/books');
+
+
 
 
 // SEED ROUTE
@@ -27,6 +30,9 @@ router.get('/', (req, res) => {
         res.render('./clubs/index.ejs', {
             clubIndex: clubs
         });
+    })
+    Book.find({}, (err, books) => {
+        
     })
 })
 

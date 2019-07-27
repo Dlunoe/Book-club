@@ -15,7 +15,9 @@
             <div class = 'col nextBook' >
                 <h3><%= clubIndex[0].clubName %></h3>
                 <h5>Next Book</h5>
-                
+                <p> <%= next[0].title %></p>
+                <p> By: <%= next[0].author %></p>
+                <img class = 'bigPic' src='<%= next[0].cover %>'>               
             </div>
 
             <div class = 'col'>
@@ -29,7 +31,8 @@
                     </li>
                     <% }) %>
                 </ul>
-            </div>
+            </div> 
+            
         </div>  
     </div>  
     

@@ -11,6 +11,7 @@ const bookSchema = new mongoose.Schema ({
     author: String,
     genre: String,
     cover: String,
+    nextBook: String,
     creator:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
