@@ -73,7 +73,7 @@ router.get('/:id', async (req, res) => {
             bookShow: foundBook         
         });
         console.log("-------------------")
-        console.log(bookShow)
+        // console.log(bookShow)
         // console.log(bookShow)
     }catch(err){
         res.send(err)
@@ -91,8 +91,10 @@ router.get('/:id/edit', (req, res) => {
 //reading list
 router.put('/:id/readingList', async (req,res)=>{
     const foundBook = await Book.findById(req.params.id).populate('creator')
+    console.log(foundBook)
         User.findByIdAndUpdate({_id:req.session.user._id},
             {$push: {readingList: {
+                id:foundBook._id,
                 title:foundBook.title,
                 author:foundBook.author,
                 genre:foundBook.genre
@@ -105,10 +107,34 @@ router.put('/:id/readingList', async (req,res)=>{
                 else{
                     console.log("-------")
                     console.log(req.session.user)
-                    res.redirect("/users/home")}
+                    res.redirect("/users/dashboard")}
                 }
             )
     })
+
+// router.put('/:id/finishedList', async (req,res)=>{
+//     console.log(req.params)
+//     const finishedBook = await Book.findById(req.params.id).populate('creator')
+//     console.log(finishedBook)
+//         User.findByIdAndUpdate({_id:req.session.user._id},
+//             {$push: {finishedList: {
+//                 id:finishedBook.id,
+//                 title:finishedBook.title,
+//                 author:finishedBook.author,
+//                 genre:finishedBook.genre
+//                 }
+//             }
+//         },
+//             {new:true},
+//             (error, user)=>{
+//                 if (error){console.log(error)}
+//                 else{
+//                     console.log("-------")
+//                     console.log(req.session.user)
+//                     res.redirect("/users/dashboard")}
+//                 }
+//             )
+//     })
 
 //UPDATE ROUTE
 router.put('/:id', (req, res) => {

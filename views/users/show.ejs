@@ -18,6 +18,12 @@
     <h5><%=userOnPage.readingList[i].title%></h5>
     <p><%=userOnPage.readingList[i].author%></p>
     <p><%=userOnPage.readingList[i].genre%></p>
+    <form action='/users/home/<%=userOnPage.readingList[i]._id%>/finishedList?_method=PUT' method='POST'>
+        <input type="submit" value="Move to already read">
+    </form>
+    <form action='/users/home/<%= userOnPage.readingList[i]._id %>?_method=DELETE' method='POST'>
+        <input type='submit' value='Delete' />
+    </form>
 <%}%>
 </div>
 <div class="container" class="finished-list">
