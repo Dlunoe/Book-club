@@ -4,6 +4,7 @@
     <a class="btn btn-outline-primary btn-sm" href="/books">book index</a>
 <%if(currentUser !== undefined){%>
 <a class="btn btn-outline-primary btn-sm" href="/users/dashboard"><%=currentUser.username%></a> 
+<a class="btn btn-outline-primary btn-sm" href="/users/logout">Logout</a>
     <%}else{%>
     <a class="btn btn-outline-primary btn-sm" href="/users/new">new user</a>
     <a class="btn btn-outline-primary btn-sm" href="/users/login">login</a>
