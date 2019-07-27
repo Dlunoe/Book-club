@@ -15,33 +15,62 @@ a {
     text-decoration: none;
 }
 
-p {
-    margin: 5px
+ul {
+    list-style: none;
+    padding: 0;
 }
 
-.nextBook {
+p {
+    margin: 5px;
+    color: 	#040927;
+}
+
+section {
     text-align: center;
-    background: #FFFBEB;
+    padding: 30px 0;
+}
+
+.row {
+    margin: 20px 0;
+}
+
+.mainSection {
+    /* text-align: center; */
     margin: 0px 20px;
-    padding: 10px
+    padding: 30px 10px;
+}
+
+.secondSection {
+    /* text-align: center; */
+    margin: 0px 20px;
+    padding: 30px 10px; 
+}
+
+.centeredDiv {
+    text-align: center;
+}
+
+.color1 {
+    background: #FFFBEB; 
 }
 
 .navbar {
-    background: black;
+    background: #040927;
 }
 
 .btn {
-    background: black;
+    background: #040927;
     color: white;
     border: none;
 }
 
 .jumbotron {
     border-radius: 0;
+    margin: 0;
 }
 
 .footer {
-    background: black;
+    background: #040927;
     color: white;
     margin: 20px 0 0 0;
     min-height: 50px;

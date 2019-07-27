@@ -12,8 +12,8 @@
 
 <div class = 'container-fluid'>
         <div class = 'row'>
-            <div class = 'col nextBook' >
-                <h3><%= clubIndex[0].clubName %></h3>
+
+            <div class = 'col mainSection color1' >
                 <h5>Next Book</h5>
                 <p> <%= next[0].title %></p>
                 <p> By: <%= next[0].author %></p>
@@ -21,19 +21,27 @@
             </div>
 
             <div class = 'col'>
-                <p><a href='/books/new'>Add Book to List</a></p>
-                <ul>
-                    <% clubIndex.forEach(function(club) { %>
-                    <li> 
-                        <p class="title">
-                            <%= club.clubName %>
-                        </p>
-                    </li>
-                    <% }) %>
-                </ul>
+                <section>
+                    <p>Give your feedback on our next book!</p>
+                    <p><a href='/suggestions'>See Suggestions</a></p>
+                </section>
+                <section> 
+                    <p><a href='/books/new'>Add Book to List</a></p>
+                    <ul>
+                        <% clubIndex.forEach(function(club) { %>
+                        <li> 
+                            <p class="title">
+                                <%= club.clubName %>
+                            </p>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </section>
+
             </div> 
-            
-        </div>  
+
+        </div> 
+
     </div>  
     
 
