@@ -20,15 +20,19 @@ router.post("/", async (req, res)=>{
         req.session.userId = newUser._Id;
         res.redirect("/books")
     }catch(err){
+        if(err="11000"){
+            res.send("Username is already taken");
+        }
         console.log(err);
         res.send(err);
     }  
 })
 
 
-router.get("/home", async (req, res)=>{
+router.get("/dashboard", async (req, res)=>{
     try{
         const userAtHome = req.session.user
+        // console.log(req.session.user)
         res.render('users/show.ejs', {
             userOnPage : userAtHome
         })
@@ -57,15 +61,31 @@ router.post("/login", async (req, res)=>{
             res.redirect("/books")
         } 
     }catch(err){
-        if(err="11000"){
-            res.send("Username is already taken");
-        }
         console.log(err);
         res.send(err)
     }
     
 })
 
+//move book to finished list
+
+
+//remove book from reading list
+router.delete('/dashboard/:id', async (req, res) => {
+    User.findOneAndUpdate({_id:req.session.user._id}
+        ,{$pull:{readingList:{_id:req.params.id}}},
+        {new:true},
+        (error, user)=>{
+            if(error){
+                res.send(error)
+            }else{
+
+                console.log("-------")
+                    console.log(req.session.user)
+                    res.redirect("/users/dashboard")}
+            }
+    )
+});
 
 
 module.exports = router;

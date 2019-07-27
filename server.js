@@ -31,6 +31,10 @@ app.use(session({
     resave:false,
     saveUninitialized:false
 }))
+app.use((req,res,next)=>{
+    res.locals.currentUser = req.session.user;
+    next();
+})
 
 //HOME PAGE
 app.get('/', (req, res) => {

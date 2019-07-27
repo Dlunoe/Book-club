@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <navbar class="navbar">
-
+    
     <a class="btn btn-outline-primary btn-sm" href="/books">book index</a>
+<%if(currentUser !== undefined){%>
+<a class="btn btn-outline-primary btn-sm" href="/users/dashboard"><%=currentUser.username%></a> 
+    <%}else{%>
     <a class="btn btn-outline-primary btn-sm" href="/users/new">new user</a>
     <a class="btn btn-outline-primary btn-sm" href="/users/login">login</a>
-    <a class="btn btn-outline-primary btn-sm" href="/users/home">home</a>
-
+    <%}%>
 
 </navbar>
 
