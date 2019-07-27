@@ -16,7 +16,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true }, () => {
 const User = require('./models/users');
 const usersController= require('./controllers/usersController')
 
-const Book = require('./models/users');
+const Book = require('./models/books');
 const booksController = require('./controllers/booksController');
 
 const Club = require('./models/clubs');
@@ -32,31 +32,18 @@ app.use(session({
     saveUninitialized:false
 }))
 
-
-
-// SEED ROUTE
-// Can be used to send some intial data for testing.
-app.get('/books/seed',(req, res)=>{
-    Book.create([
-        {
-            title: 'The Alice Network',
-            author: 'Alice Quinn',
-            genre: 'Historical Fiction'
-        },
-        {
-            title: 'Where the Crawdads Sing',
-            author: 'Delia Owens',
-            genre: 'Fiction'
-        },
-        {
-            title: 'The Silent Patient',
-            author: 'Alex Michaelides',
-            genre: 'Thriller'
-        }
-    ], (err, data)=>{
-        res.redirect('/books');
+//HOME PAGE
+app.get('/', (req, res) => {
+    Club.find({}, (err, clubs) => {
+        res.render('./clubs/index.ejs', {
+            clubIndex: clubs, 
+        });
     })
-});
+    Book.find({nextBook: "Yes"}, (err, book) => {
+        next = book
+        console.log(next[0].title);
+    })
+})
 
 app.use("/books", booksController);
 app.use("/users", usersController);

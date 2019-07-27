@@ -8,24 +8,36 @@
 </head>
 <body>
 <%-include ../partials/_navbar.ejs%>
-<%-include ./partials/_jumbo.ejs%>
-    <h1>BOOK CLUB DETAILS</h1>
+<%-include ../partials/_jumbo.ejs%>
 
+<div class = 'container-fluid'>
+        <div class = 'row'>
+            <div class = 'col nextBook' >
+                <h3><%= clubIndex[0].clubName %></h3>
+                <h5>Next Book</h5>
+                <p> <%= next[0].title %></p>
+                <p> By: <%= next[0].author %></p>
+                <img class = 'bigPic' src='<%= next[0].cover %>'>               
+            </div>
 
-    <div>
-        <ul>
-            <% clubIndex.forEach(function(club) { %>
-            <li> 
-                <p class="title">
-                    <%= club.clubName %>
-                </p>
-            </li>
-            <% }) %>
-        </ul>
-    </div>
+            <div class = 'col'>
+                <p><a href='/books/new'>Add Book to List</a></p>
+                <ul>
+                    <% clubIndex.forEach(function(club) { %>
+                    <li> 
+                        <p class="title">
+                            <%= club.clubName %>
+                        </p>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div> 
+            
+        </div>  
+    </div>  
     
 
-<%-include ./partials/_footer.ejs%>
+<%-include ../partials/_footer.ejs%>
 <%# /* pulls in info to get css working */ %>
 <link rel='stylesheet' href='/css/style.css'>
 <script src='client.js' charset='utf-8'></script>'

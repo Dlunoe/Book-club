@@ -10,6 +10,8 @@ const bookSchema = new mongoose.Schema ({
     title: String,
     author: String,
     genre: String,
+    cover: String,
+    nextBook: String,
     creator:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
@@ -20,19 +22,3 @@ const bookSchema = new mongoose.Schema ({
 const Book = mongoose.model('Book', bookSchema);
 module.exports = Book;
 
-
-// const books = [{
-//     title: 'The Alice Network',
-//     author: 'Alice Quinn',
-//     genre: 'Historical Fiction'
-// } , {
-//     title: 'Where the Crawdads Sing',
-//     author: 'Delia Owens',
-//     genre: 'Fiction'
-// } , {
-//     title: 'The Silent Patient',
-//     author: 'Alex Michaelides',
-//     genre: 'Thriller'
-// }];
-
-// module.exports = books;

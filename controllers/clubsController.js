@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Club = require ('../models/clubs');
+const Book = require ('../models/books');
+
+
 
 
 // SEED ROUTE
@@ -19,12 +22,17 @@ router.get('/seed',(req, res)=>{
 });
 
 
+module.exports = router;
+
 //INDEX ROUTE
 router.get('/', (req, res) => {
     Club.find({}, (err, clubs) => {
         res.render('./clubs/index.ejs', {
             clubIndex: clubs
         });
+    })
+    Book.find({}, (err, books) => {
+        
     })
 })
 

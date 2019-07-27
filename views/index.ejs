@@ -9,30 +9,32 @@
 <body>
 <%-include ./partials/_navbar.ejs%>
 <%-include ./partials/_jumbo.ejs%>
-    <h1>BOOK CLUB READS</h1>
-
-    <div>
-        <p><a href='/books/new'>Add Book to List</a></p>
-
-    <div>
-        <ul>
-            <% bookIndex.forEach(function(book) { %>
-            <li> 
-                <p class="title">
-                    <a href='/books/<%= book._id %>'><%= book.title %></a>
-                </p>
-                <p class="author">by <%= book.author %></p>
-                <p class="buttons">
-                    <button><a href='/books/<%= book._id %>/edit'>Edit</a></button>
-                    <form action='/books/<%= book._id %>?_method=DELETE' method='POST'>
-                        <input type='submit' value='Delete' />
-                    </form>
-                </p>
-            </li>
-            <% }) %>
-        </ul>
-    </div>
-    
+    <div class = 'container-fluid'>
+        <div class = 'row'>
+            <div class = 'col nextBook' >
+                <p> NOTES </p>
+            </div>
+            <div class = 'col'>
+                <p><a href='/books/new'>Add Book to List</a></p>
+                <ul>
+                    <% bookIndex.forEach(function(book) { %>
+                    <li> 
+                        <p class="title">
+                            <a href='/books/<%= book._id %>'><%= book.title %></a>
+                        </p>
+                        <p class="author">by <%= book.author %></p>
+                        <p class="buttons">
+                            <button><a href='/books/<%= book._id %>/edit'>Edit</a></button>
+                            <form action='/books/<%= book._id %>?_method=DELETE' method='POST'>
+                                <input type='submit' value='Delete' />
+                            </form>
+                        </p>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>  
+    </div>  
 
 <%-include ./partials/_footer.ejs%>
 <%# /* pulls in info to get css working */ %>

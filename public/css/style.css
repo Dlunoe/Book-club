@@ -14,3 +14,43 @@
 a {
     text-decoration: none;
 }
+
+p {
+    margin: 5px
+}
+
+.nextBook {
+    text-align: center;
+    background: #FFFBEB;
+    margin: 0px 20px;
+    padding: 10px
+}
+
+.navbar {
+    background: black;
+}
+
+.btn {
+    background: black;
+    color: white;
+    border: none;
+}
+
+.jumbotron {
+    border-radius: 0;
+}
+
+.footer {
+    background: black;
+    color: white;
+    margin: 20px 0 0 0;
+    min-height: 50px;
+}
+
+.container-fluid {
+    min-height: 300px;
+}
+
+.bigPic {
+    max-height: 300px;
+}
