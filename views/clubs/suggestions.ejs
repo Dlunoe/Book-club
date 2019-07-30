@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<%-include ../partials/_navbar.ejs%>
+<%-include ../partials/_jumbo.ejs%>
+
+<div class = 'container-fluid'>
+        <div class = 'row'>
+
+            <div class = 'col mainSection color1' >
+                <h5>Suggestions for Future Reads</h5>
+                    <ul>
+                        <% suggest.forEach(function(suggest) { %>
+                        <li> 
+                            <p class= 'title'>
+                                <%= suggest.title %>
+                            </p>
+                            <p class='author'>
+                                By: <%= suggest.author %>
+                            </p>
+                            <img class = 'smallPic' src='<%= suggest.cover %>'> 
+                        </li>
+                        <% }) %>
+                    </ul>
+
+           
+            </div>
+
+        </div> 
+
+    </div>  
+    
+
+<%-include ../partials/_footer.ejs%>
+<%# /* pulls in info to get css working */ %>
+<link rel='stylesheet' href='/css/style.css'>
+<script src='client.js' charset='utf-8'></script>'
+
+</body>
+</html>

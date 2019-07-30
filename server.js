@@ -48,16 +48,25 @@ app.use((req,res,next)=>{
 
 //HOME PAGE
 app.get('/', (req, res) => {
-    Club.find({}, (err, clubs) => {
-        res.render('./clubs/index.ejs', {
-            clubIndex: clubs, 
-        });
-    })
     Book.find({nextBook: "Yes"}, (err, book) => {
         next = book
         console.log(next[0].title);
     })
+    Book.find({clubRead: "Yes"}, (err, book) => {
+        res.render('./clubs/homepage.ejs', {
+            bookIndex: book, 
+        });
+    })
 })
+
+//SUGGESTIONS PAGE
+app.get('/suggestions', (req, res) => {
+    Book.find({clubSuggest: "Yes"}, (err, book) => {
+        res.render('./clubs/suggestions.ejs', {
+            suggest: book, 
+        });
+    })
+});
 
 app.use("/books", booksController);
 app.use("/users", usersController);

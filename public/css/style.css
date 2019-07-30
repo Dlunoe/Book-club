@@ -35,13 +35,18 @@ section {
 }
 
 .mainSection {
-    /* text-align: center; */
+    text-align: center;
     margin: 0px 20px;
     padding: 30px 10px;
 }
 
 .secondSection {
     /* text-align: center; */
+    margin: 0px 20px;
+    padding: 30px 10px; 
+}
+
+.addBook {
     margin: 0px 20px;
     padding: 30px 10px; 
 }
@@ -82,4 +87,13 @@ section {
 
 .bigPic {
     max-height: 300px;
+}
+
+.smallPic {
+    max-height: 150px;
+}
+
+.readList {
+    display: inline;
+    margin: 10px;
 }
