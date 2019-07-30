@@ -9,6 +9,9 @@
 <body>
 <%-include ../partials/_navbar.ejs%>
 <%-include ../partials/_jumbo.ejs%>
+<% if(typeof message !== "undefined"){%>
+  <p><%= message %></p>
+  <%}%>
 <form action="/users/login" method="POST">
     <label for="username">Username:</label>
     <input type="text" name="username">

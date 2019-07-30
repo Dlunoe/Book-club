@@ -5,6 +5,11 @@ const methodOverride = require('method-override');
 const session=require('express-session')
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+const MongoDBStore = require('connect-mongodb-session')(session);
+const store = new MongoDBStore({
+    uri: 'mongodb://localhost:27017/books',
+    collection: 'mySessions'
+  });
 
 const mongoURI = 'mongodb://localhost:27017/'+'books';
 const db = mongoose.connection;
@@ -28,11 +33,16 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(session({
     secret:"gotstokeepit",
+    store:store,
     resave:false,
     saveUninitialized:false
 }))
 app.use((req,res,next)=>{
     res.locals.currentUser = req.session.user;
+    if(req.session.message){
+        res.locals.message=req.session.message;
+        req.session.message=null;
+    }
     next();
 })
 
