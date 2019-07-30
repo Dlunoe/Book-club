@@ -22,9 +22,10 @@ router.post("/", async (req, res)=>{
     }catch(err){
         if(err="11000"){
             res.send("Username is already taken");
-        }
-        console.log(err);
-        res.send(err);
+        }else{
+            req.session.message="invalid credentials";
+            console.log(err);
+        }       
     }  
 })
 
@@ -87,5 +88,9 @@ router.delete('/dashboard/:id', async (req, res) => {
     )
 });
 
+router.get('/logout', function(req, res) {
+    req.session.destroy()
+    res.redirect('/books');
+});
 
 module.exports = router;

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Book = require ('../models/books');
 const User = require('../models/users')
+const requireLogin = require('../middleware/requireLogin')
 
 // SEED ROUTE
 // Can be used to send some intial data for testing.
@@ -55,7 +56,7 @@ router.get('/seed',(req, res)=>{
 router.get('/', async (req, res) => {
     try{
         req.body.creator = req.session.userId;
-        const books = await Book.find()
+        const books = await Book.find().populate('creator')
         res.render('index.ejs', {
             bookIndex: books
         });
@@ -65,7 +66,7 @@ router.get('/', async (req, res) => {
 })
 
 //NEW ROUTE
-router.get('/new', (req, res) => {
+router.get('/new', requireLogin, (req, res) => {
     res.render('new.ejs');
     console.log(Book);
 })
@@ -73,6 +74,7 @@ router.get('/new', (req, res) => {
 //CREATE ROUTE
 router.post('/', (req, res) => {
     if(!req.session.userId){
+        req.session.message = "You must be logged in to do that"
         res.redirect("/users/login")
     }else{
         Book.create({
@@ -107,7 +109,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //EDIT ROUTE
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', requireLogin, (req, res) => {
     Book.findById(req.params.id, (err, foundBook) => {
         res.render('edit.ejs', {
             bookUpdate: foundBook
@@ -163,18 +165,29 @@ router.put('/:id/readingList', async (req,res)=>{
 //     })
 
 //UPDATE ROUTE
-router.put('/:id', (req, res) => {
-    console.log(req.body);
+router.put('/:id', async (req, res) => {
+    const book = await Book.findById(req.params.id)
+    if(book.creator.toString() !== req.session.userId){
+        req.session.message = "Unauthorized, you didn't upload this book."
+        res.redirect("/books")
+    }else{
     Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedBook) => {
         res.redirect('/books')
     });
+}
 });
 
 //DESTROY ROUTE
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
+    const book = await Book.findById(req.params.id)
+    if(book.creator.toString() !== req.session.userId){
+        req.session.message = "Unauthorized, you didn't upload this book"
+        res.redirect('/books')
+    }else{
     Book.findByIdAndRemove(req.params.id, (err, bookRemove) => {
         res.redirect('/books');
     });
+}
 });
 
 module.exports = router;

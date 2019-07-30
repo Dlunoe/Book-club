@@ -8,6 +8,9 @@
 </head>
 <body>
 <%-include ./partials/_navbar.ejs%>
+<% if(typeof message !== "undefined"){%>
+  <p><%= message %></p>
+  <%}%>
     <h1>SHOW INDEX</h1>
 <form action="/books/<%=bookShow._id%>/readingList?_method=PUT" method="POST">
     <p class="title"> <%= bookShow.title %></p>
