@@ -8,11 +8,12 @@
 </head>
 <body>
 <%-include ../partials/_navbar.ejs%>
-    <h1>USER PAGE</h1>
-    <%=userOnPage.username%>
+    <h1>Dashboard</h1>
 <div class="container" class="book-club">
+<p><a href='/books/new'>Add Book to Index</a></p>
 </div>
 <div class="container" class="reading-list">
+<h2>Reading Wishlist</h2>
 
 <%for (i=0; i<userOnPage.readingList.length; i++){%>
     <h5><%=userOnPage.readingList[i].title%></h5>
@@ -24,9 +25,19 @@
     <form action='/users/dashboard/<%= userOnPage.readingList[i]._id %>?_method=DELETE' method='POST'>
         <input type='submit' value='Delete' />
     </form>
-<%}%>
+<%};%>
 </div>
+
 <div class="container" class="finished-list">
+<h2>Already read books</h2>
+<%for (i=0; i<userOnPage.finishedList.length; i++){%>
+
+    <h5><%=userOnPage.finishedList[i].title%></h5>
+    <p><%=userOnPage.finishedList[i].author%></p>
+    <p><%=userOnPage.finishedList[i].genre%></p>
+    <%}%>
+
+
 </div>
 
 

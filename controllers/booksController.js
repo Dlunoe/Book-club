@@ -120,13 +120,10 @@ router.get('/:id/edit', requireLogin, (req, res) => {
 router.put('/:id/readingList', async (req,res)=>{
     const foundBook = await Book.findById(req.params.id).populate('creator')
     console.log(foundBook)
+    console.log(req.session.user)
         User.findByIdAndUpdate({_id:req.session.user._id},
-            {$push: {readingList: {
-                id:foundBook._id,
-                title:foundBook.title,
-                author:foundBook.author,
-                genre:foundBook.genre
-                }
+            {$push: {
+                readingList:foundBook
             }
         },
             {new:true},
@@ -140,29 +137,7 @@ router.put('/:id/readingList', async (req,res)=>{
             )
     })
 
-// router.put('/:id/finishedList', async (req,res)=>{
-//     console.log(req.params)
-//     const finishedBook = await Book.findById(req.params.id).populate('creator')
-//     console.log(finishedBook)
-//         User.findByIdAndUpdate({_id:req.session.user._id},
-//             {$push: {finishedList: {
-//                 id:finishedBook.id,
-//                 title:finishedBook.title,
-//                 author:finishedBook.author,
-//                 genre:finishedBook.genre
-//                 }
-//             }
-//         },
-//             {new:true},
-//             (error, user)=>{
-//                 if (error){console.log(error)}
-//                 else{
-//                     console.log("-------")
-//                     console.log(req.session.user)
-//                     res.redirect("/users/dashboard")}
-//                 }
-//             )
-//     })
+
 
 //UPDATE ROUTE
 router.put('/:id', async (req, res) => {
