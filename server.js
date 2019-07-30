@@ -42,9 +42,9 @@ app.get('/', (req, res) => {
         next = book
         console.log(next[0].title);
     })
-    Club.find({}, (err, clubs) => {
+    Book.find({clubRead: "Yes"}, (err, book) => {
         res.render('./clubs/homepage.ejs', {
-            clubIndex: clubs, 
+            bookIndex: book, 
         });
     })
 })
@@ -56,12 +56,6 @@ app.get('/suggestions', (req, res) => {
             suggest: book, 
         });
     })
-
-    // Book.find({bookSuggest: "Yes"}, (err, book) => {
-    //     res.render('/clubs/suggestions.ejs', {
-    //         suggest: book
-    //     });
-    // });
 });
 
 app.use("/books", booksController);
