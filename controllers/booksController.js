@@ -10,20 +10,42 @@ router.get('/seed',(req, res)=>{
         {
             title: 'The Alice Network',
             author: 'Alice Quinn',
-            genre: 'Historical Fiction'
+            genre: 'Historical Fiction',
+            cover: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492238040l/32051912.jpg',
+            // nextBook: String,
+            clubRead: 'Yes',
+            // clubSuggest: String,
         },
         {
             title: 'Where the Crawdads Sing',
             author: 'Delia Owens',
-            genre: 'Fiction'
+            genre: 'Fiction',
+            cover: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1524102644l/36809135.jpg',
+            clubRead: 'Yes',
         },
         {
             title: 'The Silent Patient',
             author: 'Alex Michaelides',
-            genre: 'Thriller'
+            genre: 'Thriller',
+            cover: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1550161053l/40097951._SY475_.jpg',
+            clubRead: 'Yes'
+        },
+        {
+            title: 'The 7.5 Deaths of Evelyn Hardcastle',
+            author: 'Stuart Turton',
+            genre: 'Mystery',
+            cover: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1506896221l/36337550.jpg',
+            nextBook: 'Yes'
+        },
+        {
+            title: 'Boy Swallows Universe',
+            author: 'Trent Dalton',
+            genre: 'Fiction',
+            cover: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1519792733l/37558445._SY475_.jpg',
+            clubSuggest: 'Yes'
         }
     ], (err, data)=>{
-        res.redirect('/books');
+        res.redirect('/clubs/homepage');
     })
 });
 
