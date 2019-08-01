@@ -34,8 +34,8 @@ app.use(express.static('public'));
 app.use(session({
     secret:"gotstokeepit",
     store:store,
-    resave:false,
-    saveUninitialized:false
+    resave:true,
+    saveUninitialized:true
 }))
 app.use((req,res,next)=>{
     res.locals.currentUser = req.session.user;
@@ -49,6 +49,7 @@ app.use((req,res,next)=>{
 //HOME PAGE
 app.get('/', (req, res) => {
     Book.find({nextBook: "Yes"}, (err, book) => {
+        console.log(req.session)
         next = book
         console.log(next[0].title);
     })

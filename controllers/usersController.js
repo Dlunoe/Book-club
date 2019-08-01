@@ -33,8 +33,9 @@ router.post("/", async (req, res)=>{
 
 router.get("/dashboard", async (req, res)=>{
     try{
-        const userAtHome = req.session.user
-        console.log(userAtHome)
+        const userAtHome = await User.findById(req.session.userId)
+      
+        // console.log(userAtHome)
         // console.log(req.session.user)
         res.render('users/show.ejs', {
             userOnPage : userAtHome
@@ -84,9 +85,20 @@ router.put('/dashboard/:id/finishedList', async (req,res)=>{
                 else{
                     console.log("-------")
                     console.log(req.session.user)
-                    res.redirect("/users/dashboard")}
+                    }
                 }
             )
+        User.findByIdAndUpdate({_id:req.session.user._id},
+            {$pull: {readingList: finishedBook
+            }
+        },
+            {new:true},
+            (error, user)=>{
+                if(error){console.log(error)}
+                else{
+                    res.redirect("/users/dashboard")
+                }
+            })
     })
 
 //remove book from reading list
