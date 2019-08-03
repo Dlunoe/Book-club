@@ -12,16 +12,23 @@
 <% if(typeof message !== "undefined"){%>
   <p><%= message %></p>
   <%}%>
-<form action="/users/login" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" name="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password">
-    <input type="submit" value="LOGIN">
-</form>
 
-<h6>New user? Make an account <a href="/users/new">here</a></h6>
-  <%-include ../partials/_footer.ejs%>
+<div class='container-fluid loginForm'>
+  <div class="row">
+    <form action="/users/login" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" name="username">
+      <label for="password">Password:</label>
+      <input type="password" name="password">
+      <input type="submit" value="LOGIN">
+    </form>
+  </div>
+  <div class="row">
+    <h6>New user? Make an account <a href="/users/new">here</a></h6>
+  </div>
+</div>
+
+<%-include ../partials/_footer.ejs%>
     
 </body>
 </html>

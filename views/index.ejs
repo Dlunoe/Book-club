@@ -12,14 +12,13 @@
 
     <div class = 'container-fluid'>
         <div class = 'row'>
-            <div class = 'col nextBook' >
-                <p> NOTES </p>
-                <% if(typeof message !== "undefined"){%>
+            <%# <div class = 'col nextBook' > %>
+                <%# <p> NOTES </p> %>
+                <% if(typeof message !== "undefined"){ %>
   <p><%= message %></p>
   <%}%>
-            </div>
+            </div> %>
             <div class = 'col'>
-                <p><a href='/books/new'>Add Book to List</a></p>
                 <ul>
                     <% bookIndex.forEach(function(book) { %>
                     <li> 
@@ -29,15 +28,16 @@
                         <p class="author">by <%= book.author %></p>
                         <%if(book.creator == currentUser){%>
                         <p class="buttons">
-                            <button><a href='/books/<%= book._id %>/edit'>Edit</a></button>
+                            <button class='buttonFormat'><a href='/books/<%= book._id %>/edit'>Edit</a></button>
                             <form action='/books/<%= book._id %>?_method=DELETE' method='POST'>
-                                <input type='submit' value='Delete' />
+                                <input type='submit' value='Delete' class='buttonFormat'/>
                             </form>
                         </p>
                         <%}%>
                     </li>
                     <% }) %>
                 </ul>
+                <p><a href='/books/new'>Add Book to List</a></p>
             </div>
         </div>  
     </div>  

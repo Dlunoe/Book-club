@@ -8,29 +8,34 @@
 </head>
 <body>
 <%-include ../partials/_navbar.ejs%>
-    <h1>USER PAGE</h1>
-    <%=userOnPage.username%>
-<div class="container" class="book-club">
-</div>
-<div class="container" class="reading-list">
+<%-include ../partials/_jumbo.ejs%>
 
-<%for (i=0; i<userOnPage.readingList.length; i++){%>
-    <h5><%=userOnPage.readingList[i].title%></h5>
-    <p><%=userOnPage.readingList[i].author%></p>
-    <p><%=userOnPage.readingList[i].genre%></p>
-    <form action='/users/dashboard/<%=userOnPage.readingList[i]._id%>/finishedList?_method=PUT' method='POST'>
-        <input type="submit" value="Move to already read">
-    </form>
-    <form action='/users/dashboard/<%= userOnPage.readingList[i]._id %>?_method=DELETE' method='POST'>
-        <input type='submit' value='Delete' />
-    </form>
-<%}%>
-</div>
-<div class="container" class="finished-list">
+    
+<%# <div class="container" class="book-club">
+</div> %>
+<div class="container-fluid" class="reading-list">
+    <div class='row'>
+        <div class = 'col'>
+            <p><%=userOnPage.username %>'s Wish List</p>
+            <%for (i=0; i<userOnPage.readingList.length; i++){%>
+                <p class = 'title'><%=userOnPage.readingList[i].title%></p>
+                <p class = 'author'><%=userOnPage.readingList[i].author%></p>
+                <form action='/users/dashboard/<%=userOnPage.readingList[i]._id%>/finishedList?_method=PUT' method='POST'>
+                    <input type="submit" value="Move to already read" class='buttonFormat'>
+                </form>
+                <form action='/users/dashboard/<%= userOnPage.readingList[i]._id %>?_method=DELETE' method='POST'>
+                    <input type='submit' value='Delete' class='buttonFormat' />
+                </form>
+            <%}%>
+        </div>
+        <div class= 'col finished-list'>
+            <p>Already Read Books</p>
+            <%# Items read will be moved here %>
+        </div>
+    </div>
 </div>
 
-
-<link rel='stylesheet' type='text/css' href='/css/style.css'>
+<%-include ../partials/_footer.ejs%>
 
 </body>
 </html>

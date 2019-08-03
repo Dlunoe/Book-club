@@ -11,43 +11,41 @@
 <%-include ../partials/_jumbo.ejs%>
 
 <div class = 'container-fluid'>
-        <div class = 'row'>
+    <div class = 'row'>
 
-            <div class = 'col mainSection color1' >
-                <h5>Current Book</h5>
-                <p class = 'title'> <%= next[0].title %></p>
-                <p class = 'author'> By: <%= next[0].author %></p>
-                <img class = 'bigPic' src='<%= next[0].cover %>'>               
-            </div>
+        <div class = 'col mainSection color1' >
+            <h5>Current Book</h5>
+            <p class = 'title'> <%= next[0].title %></p>
+            <p class = 'author'> By: <%= next[0].author %></p>
+            <img class = 'bigPic' src='<%= next[0].cover %>'>               
+        </div>
 
-            <div class = 'col'>
+        <div class = 'col'>
+            <section>
+                <p>Give your feedback on our next book!</p>
+                <p><a href='/suggestions'>See Suggestions</a></p>
+            </section>
+            <section> 
+                <p>Previous Reads</p>
                 <section>
-                    <p>Give your feedback on our next book!</p>
-                    <p><a href='/suggestions'>See Suggestions</a></p>
+                    <% bookIndex.forEach(function(book) { %>
+                    <div class = 'readList'> 
+                        <img class = 'smallPic' src='<%= book.cover %>'>
+                    </div>
+                    <% }) %>
                 </section>
-                <section> 
-                    <p>Previous Reads</p>
-                    <section>
-                        <% bookIndex.forEach(function(book) { %>
-                        <div class = 'readList'> 
-                            <img class = 'smallPic' src='<%= book.cover %>'>
-                        </div>
-                        <% }) %>
-                    </section>
-                     <p><a href='/books/new'>Add Book to List</a></p>
-                </section>
-
-            </div> 
-
+                    <p><a href='/books/new'>Add Book to List</a></p>
+            </section>
         </div> 
 
-    </div>  
+    </div> 
+</div>  
     
 
 <%-include ../partials/_footer.ejs%>
 <%# /* pulls in info to get css working */ %>
 <link rel='stylesheet' href='/css/style.css'>
-<script src='client.js' charset='utf-8'></script>'
+<script src='client.js' charset='utf-8'></script>
 
 </body>
 </html>
