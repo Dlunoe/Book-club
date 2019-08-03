@@ -8,6 +8,7 @@
 </head>
 <body>
 <%-include ../partials/_navbar.ejs%>
+<%-include ../partials/_jumbo.ejs%>
     <h1>Dashboard</h1>
 <div class="container" class="book-club">
 <p><a href='/books/new'>Add Book to Index</a></p>
@@ -36,12 +37,9 @@
     <p><%=userOnPage.finishedList[i].author%></p>
     <p><%=userOnPage.finishedList[i].genre%></p>
     <%}%>
-
-
 </div>
 
-
-<link rel='stylesheet' type='text/css' href='/css/style.css'>
+<%-include ../partials/_footer.ejs%>
 
 </body>
 </html>
