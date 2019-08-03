@@ -55,7 +55,7 @@ router.get('/seed',(req, res)=>{
 //INDEX ROUTE
 router.get('/', async (req, res) => {
     try{
-        console.log(req.session)
+        
         req.body.creator = req.session.userId;
         const books = await Book.find().populate('creator')
         res.render('index.ejs', {
@@ -131,12 +131,11 @@ router.put('/:id/readingList', async (req,res)=>{
             (error, user)=>{
                 if (error){console.log(error)}
                 else{                     
-                    // console.log("-------")
-                    // console.log(req.session.user)
+                    console.log("-------")
+                    console.log(req.session.user)
                     }
                 }
-            )
-            
+            )            
             res.redirect("/users/dashboard")      
     })
 
