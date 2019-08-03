@@ -8,13 +8,21 @@
 </head>
 <body>
 <%-include ../partials/_navbar.ejs%>
-<form action="/users" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" name="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password">
-    <input type="submit" value="CREATE ACCOUNT">
-</form>
-    
+<%-include ../partials/_jumbo.ejs%>
+
+<div class='container-fluid loginForm'>
+    <div class="row">
+        <form action="/users" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username">
+            <label for="password">Password:</label>
+            <input type="password" name="password">
+            <input type="submit" value="CREATE ACCOUNT">
+        </form>
+    </div>
+</div>
+
+<%-include ../partials/_footer.ejs%>
+
 </body>
 </html>

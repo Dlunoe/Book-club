@@ -55,8 +55,25 @@ section {
     text-align: center;
 }
 
-.color1 {
+.container-fluid {
     background: #FFFBEB; 
+    min-height: 420px;
+}
+
+.loginForm {
+    text-align: center;
+    padding: 30px;
+}
+
+.buttonFormat {
+    border-radius: 10px;
+    color: black;
+    background-color: white;
+    font-size: 16px;
+}
+
+.row {
+    margin: 0;
 }
 
 .navbar {
@@ -77,12 +94,8 @@ section {
 .footer {
     background: #040927;
     color: white;
-    margin: 20px 0 0 0;
+    /* margin: 20px 0 0 0; */
     min-height: 50px;
-}
-
-.container-fluid {
-    min-height: 300px;
 }
 
 .bigPic {
