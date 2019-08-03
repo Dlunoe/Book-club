@@ -110,3 +110,7 @@ section {
     display: inline;
     margin: 10px;
 }
+
+h4 {
+    padding: 20px;
+}
