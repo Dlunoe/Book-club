@@ -9,30 +9,34 @@
 <body>
 <%-include ../partials/_navbar.ejs%>
 <%-include ../partials/_jumbo.ejs%>
+    <h1>Dashboard</h1>
+<div class="container" class="book-club">
+<p><a href='/books/new'>Add Book to Index</a></p>
+</div>
+<div class="container" class="reading-list">
+<h2>Reading Wishlist</h2>
 
-    
-<%# <div class="container" class="book-club">
-</div> %>
-<div class="container-fluid" class="reading-list">
-    <div class='row'>
-        <div class = 'col'>
-            <p><%=userOnPage.username %>'s Wish List</p>
-            <%for (i=0; i<userOnPage.readingList.length; i++){%>
-                <p class = 'title'><%=userOnPage.readingList[i].title%></p>
-                <p class = 'author'><%=userOnPage.readingList[i].author%></p>
-                <form action='/users/dashboard/<%=userOnPage.readingList[i]._id%>/finishedList?_method=PUT' method='POST'>
-                    <input type="submit" value="Move to already read" class='buttonFormat'>
-                </form>
-                <form action='/users/dashboard/<%= userOnPage.readingList[i]._id %>?_method=DELETE' method='POST'>
-                    <input type='submit' value='Delete' class='buttonFormat' />
-                </form>
-            <%}%>
-        </div>
-        <div class= 'col finished-list'>
-            <p>Already Read Books</p>
-            <%# Items read will be moved here %>
-        </div>
-    </div>
+<%for (i=0; i<userOnPage.readingList.length; i++){%>
+    <h5><%=userOnPage.readingList[i].title%></h5>
+    <p><%=userOnPage.readingList[i].author%></p>
+    <p><%=userOnPage.readingList[i].genre%></p>
+    <form action='/users/dashboard/<%=userOnPage.readingList[i]._id%>/finishedList?_method=PUT' method='POST'>
+        <input type="submit" value="Move to already read">
+    </form>
+    <form action='/users/dashboard/<%= userOnPage.readingList[i]._id %>?_method=DELETE' method='POST'>
+        <input type='submit' value='Delete' />
+    </form>
+<%};%>
+</div>
+
+<div class="container" class="finished-list">
+<h2>Already read books</h2>
+<%for (i=0; i<userOnPage.finishedList.length; i++){%>
+
+    <h5><%=userOnPage.finishedList[i].title%></h5>
+    <p><%=userOnPage.finishedList[i].author%></p>
+    <p><%=userOnPage.finishedList[i].genre%></p>
+    <%}%>
 </div>
 
 <%-include ../partials/_footer.ejs%>

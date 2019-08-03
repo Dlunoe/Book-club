@@ -19,13 +19,17 @@
   <%}%>
             </div> %>
             <div class = 'col'>
+
                 <ul>
                     <% bookIndex.forEach(function(book) { %>
                     <li> 
+                    
                         <p class="title">
                             <a href='/books/<%= book._id %>'><%= book.title %></a>
                         </p>
                         <p class="author">by <%= book.author %></p>
+                        <form action="/books/<%=book._id%>/readingList?_method=PUT" method="POST">
+                      <input type="submit" value="Add to reading list"></form>
                         <%if(book.creator == currentUser){%>
                         <p class="buttons">
                             <button class='buttonFormat'><a href='/books/<%= book._id %>/edit'>Edit</a></button>
@@ -45,7 +49,7 @@
 <%-include ./partials/_footer.ejs%>
 <%# /* pulls in info to get css working */ %>
 <link rel='stylesheet' href='/css/style.css'>
-<script src='client.js' charset='utf-8'></script>'
+<script src='client.js' charset='utf-8'></script>
 
 </body>
 </html>

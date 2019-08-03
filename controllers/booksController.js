@@ -55,6 +55,7 @@ router.get('/seed',(req, res)=>{
 //INDEX ROUTE
 router.get('/', async (req, res) => {
     try{
+        console.log(req.session)
         req.body.creator = req.session.userId;
         const books = await Book.find().populate('creator')
         res.render('index.ejs', {
@@ -85,7 +86,7 @@ router.post('/', (req, res) => {
             nextBook: req.body.nextBook,
             clubRead: req.body.clubRead,
             clubSuggest: req.body.clubSuggest,
-            creator:req.session.userId   
+            creator: req.session.userId   
     });
     res.redirect("/books")
     }
@@ -118,51 +119,28 @@ router.get('/:id/edit', requireLogin, (req, res) => {
 });
 //reading list
 router.put('/:id/readingList', async (req,res)=>{
-    const foundBook = await Book.findById(req.params.id).populate('creator')
-    console.log(foundBook)
-        User.findByIdAndUpdate({_id:req.session.user._id},
-            {$push: {readingList: {
-                id:foundBook._id,
-                title:foundBook.title,
-                author:foundBook.author,
-                genre:foundBook.genre
-                }
+    const foundBook = await Book.findById(req.params.id)
+    // console.log(foundBook)
+    // console.log(req.session.user)
+    User.findByIdAndUpdate({_id:req.session.user._id},
+            {$push: {
+                readingList:foundBook
             }
         },
-            {new:true},
+            // {new:true},
             (error, user)=>{
                 if (error){console.log(error)}
-                else{
-                    console.log("-------")
-                    console.log(req.session.user)
-                    res.redirect("/users/dashboard")}
+                else{                     
+                    // console.log("-------")
+                    // console.log(req.session.user)
+                    }
                 }
             )
+            
+            res.redirect("/users/dashboard")      
     })
 
-// router.put('/:id/finishedList', async (req,res)=>{
-//     console.log(req.params)
-//     const finishedBook = await Book.findById(req.params.id).populate('creator')
-//     console.log(finishedBook)
-//         User.findByIdAndUpdate({_id:req.session.user._id},
-//             {$push: {finishedList: {
-//                 id:finishedBook.id,
-//                 title:finishedBook.title,
-//                 author:finishedBook.author,
-//                 genre:finishedBook.genre
-//                 }
-//             }
-//         },
-//             {new:true},
-//             (error, user)=>{
-//                 if (error){console.log(error)}
-//                 else{
-//                     console.log("-------")
-//                     console.log(req.session.user)
-//                     res.redirect("/users/dashboard")}
-//                 }
-//             )
-//     })
+
 
 //UPDATE ROUTE
 router.put('/:id', async (req, res) => {

@@ -5,11 +5,15 @@ const userSchema = new Schema({
     username:{type:String, unique:true, required: true},
     password:{type: String, required: true},
     readingList:[{
-        title: String,
-        author: String,
-        genre: String,
+        type:mongoose.Schema.Types.Mixed,
+        ref:"Book",
+        required:false
     }],
-    finishedList:{type:Array, "default":[]}
+    finishedList:[{
+        type:mongoose.Schema.Types.Mixed,
+        ref:"Book",
+        required:false
+    }]
 });
 
 const User = mongoose.model("User", userSchema);

@@ -18,7 +18,8 @@ router.post("/", async (req, res)=>{
     try{
         const newUser = await User.create(req.body);
         req.session.userId = newUser._Id;
-        res.redirect("/books")
+        req.session.user=newUser
+        res.redirect("/")
     }catch(err){
         if(err="11000"){
             res.send("Username is already taken");
@@ -32,12 +33,13 @@ router.post("/", async (req, res)=>{
 
 router.get("/dashboard", async (req, res)=>{
     try{
-        const userAtHome = req.session.user
+        const userAtHome = await User.findById(req.session.userId)
+      
+        // console.log(userAtHome)
         // console.log(req.session.user)
         res.render('users/show.ejs', {
             userOnPage : userAtHome
-        })
-        
+        })   
     }catch(err){
         console.log(err);
         res.send(err)
@@ -59,7 +61,7 @@ router.post("/login", async (req, res)=>{
             req.session.userId=userFromDb._id
             req.session.user=userFromDb
             console.log(req.session.user)
-            res.redirect("/books")
+            res.redirect("/")
         } 
     }catch(err){
         console.log(err);
@@ -69,12 +71,43 @@ router.post("/login", async (req, res)=>{
 })
 
 //move book to finished list
-
+router.put('/dashboard/:id/finishedList', async (req,res)=>{
+    // console.log(req.params)
+    const finishedBook = await Book.findById(req.params.id).populate('creator')
+    console.log(req.body)
+        User.findByIdAndUpdate({_id:req.session.user._id},
+            {$push: {finishedList: finishedBook
+            }
+        },
+            {new:true},
+            (error, user)=>{
+                if (error){console.log(error)}
+                else{
+                    console.log("-------")
+                    console.log(req.session.user)
+                    }
+                }
+            )
+        User.findByIdAndUpdate({_id:req.session.user._id},
+            {$pull: {readingList: finishedBook
+            }
+        },
+            {new:true},
+            (error, user)=>{
+                if(error){console.log(error)}
+                else{
+                    res.redirect("/users/dashboard")
+                }
+            })
+    })
 
 //remove book from reading list
 router.delete('/dashboard/:id', async (req, res) => {
+    console.log(req.params.id)
+    const foundBook = await Book.findById(req.params.id).populate('creator')
+    console.log(foundBook)
     User.findOneAndUpdate({_id:req.session.user._id}
-        ,{$pull:{readingList:{_id:req.params.id}}},
+        ,{$pull:{readingList:foundBook}},
         {new:true},
         (error, user)=>{
             if(error){
