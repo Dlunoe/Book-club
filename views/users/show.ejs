@@ -16,7 +16,8 @@
     <div class='row'>
         <div class='col'>
             <h4>Reading Wishlist</h4>
-            <%if(typeof userOnPage.readingList !=="null"){%>
+            <%if(userOnPage.readingList===null){%>
+            <%}else{%>
             <%for (i=0; i<userOnPage.readingList.length; i++){%>
                 <p class='title'><%=userOnPage.readingList[i].title%></p>
                 <p class='author'><%=userOnPage.readingList[i].author%></p>

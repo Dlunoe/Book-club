@@ -33,13 +33,13 @@ router.post("/", async (req, res)=>{
 
 router.get("/dashboard", async (req, res)=>{
     try{
-        const userAtHome = await User.findById(req.session.userId)
-      
-        // console.log(userAtHome)
-        // console.log(req.session.user)
+        const userAtHome = await User.findById(req.session.user._id)        
+        console.log(req.session.user)
         res.render('users/show.ejs', {
             userOnPage : userAtHome
-        })   
+        },
+        console.log(userAtHome)
+        )   
     }catch(err){
         console.log(err);
         res.send(err)
