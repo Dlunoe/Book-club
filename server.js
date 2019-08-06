@@ -14,6 +14,7 @@ const store = new MongoDBStore({
 
 const mongoURI = process.env.MONGODB_URI;
 const db = mongoose.connection;
+const PORT = process.env.PORT
 
 mongoose.connect(mongoURI, { useNewUrlParser: true }, () => {
     console.log('the mongo connection is established');
@@ -137,6 +138,6 @@ app.use("/users", usersController);
 app.use("/clubs", clubsController);
 
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
     console.log("The app is running");
 });
