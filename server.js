@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -7,11 +8,11 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const MongoDBStore = require('connect-mongodb-session')(session);
 const store = new MongoDBStore({
-    uri: 'mongodb://localhost:27017/books',
+    uri: process.env.MONGODB_URI,
     collection: 'mySessions'
   });
 
-const mongoURI = 'mongodb://localhost:27017/'+'books';
+const mongoURI = process.env.MONGODB_URI;
 const db = mongoose.connection;
 
 mongoose.connect(mongoURI, { useNewUrlParser: true }, () => {
@@ -32,7 +33,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(session({
-    secret:"gotstokeepit",
+    secret:process.env.SECRET,
     store:store,
     resave:true,
     saveUninitialized:true
@@ -104,15 +105,15 @@ app.get('/', (req, res) => {
         }
         else {
             Book.find({nextBook: "Yes"}, (err, book) => {
-                        console.log(req.session)
-                        next = book
-                        console.log(next[0].title);
-                    })
+                    console.log(req.session)
+                    next = book
+                    console.log(next[0].title);
+                })
             Book.find({clubRead: "Yes"}, (err, book) => {
-                        res.render('./clubs/homepage.ejs', {
-                            bookIndex: book, 
-                        });
-                    })
+                    res.render('./clubs/homepage.ejs', {
+                        bookIndex: book, 
+                    });
+                })
         }
     })
     
@@ -136,6 +137,6 @@ app.use("/users", usersController);
 app.use("/clubs", clubsController);
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log("The app is running");
 });
